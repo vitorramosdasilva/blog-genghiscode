@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+
+  {% block title %}<title>Blog Post - Start Bootstrap Template</title>{% endblock %}
+
+  <!-- Bootstrap core CSS -->
+ <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+ <link href="{% static 'css/blog-post.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+{% include 'nav_bar.html' %}
+
+  <!-- Page Content -->
+  {% block content %}
+  {% endblock %}
+
+  <!-- Footer -->
+  {% include 'footer.html' %}
+
+<!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>

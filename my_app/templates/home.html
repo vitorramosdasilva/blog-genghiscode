@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Blog</title>{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+
+    <div class="row">
+         <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+        <!-- Search Widget -->
+        {% include 'procura.html' %}
+
+        <!-- Categories Widget -->
+        {% include 'categorias.html' %}
+
+      </div>
+
+      <!-- Post Content Column -->
+{% for post in posts %}
+      <div class="col-lg-8">
+
+        <!-- Title -->
+
+        <h1 class="mt-4"><a href="{% url 'post_details' pk=post.pk %}">{{ post.title }}</a></h1>
+
+        <!-- Author -->
+        <p class="lead">
+          by
+          <a href="#">{{ post.author.get_full_name }}</a>
+
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>{{ post.created_at|date:'d, M Y' }}</p>
+
+        <hr>
+
+        <!-- Preview Image -->
+         <!-- Post Summary -->
+        <h3>Resumo</h3>
+        {{ post.summary|safe }}
+        <!--        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">-->
+
+<!--        <hr>-->
+<!--        <h4>Conteudo</h4>-->
+<!--         &lt;!&ndash; Post Content  &ndash;&gt;-->
+<!--        {{ post.content|safe }}-->
+
+
+
+        <hr>
+
+      </div>
+      {% endfor %}
+
+
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+  {% endblock %}
