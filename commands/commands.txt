@@ -9,30 +9,37 @@ python3 manage.py migrate
 python3 manage.py makemigrations
 python manage.py migrate --fake-initial
 
-
-
 python3 manage.py collectstatic
-
 python3 manage.py runserver
 
 
 pip install psycopg2-binary
 pip install django-stdimage
-
-
 pip install whitenoise
-
 pip install django-crispy-forms
-
 pip3 install dj-database-url
 pip3 install django-widget-tweaks
 
 python3 manage.py createsuperuser
 
+## Git
+git remote add origin https://github.com/user/repo.git
+# Defina um novo remote
 
-### Django ###
-# *.log
-# *.pot
-# *.pyc
-# __pycache__/
-# local_settings.py
+git remote -v
+# Verifique  o novo remote
+# > origin  https://github.com/user/repo.git (fetch)
+# > origin  https://github.com/user/repo.git (push)
+
+git init
+git add .
+git commit -m "initial commit"
+git push origin master
+
+
+## Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
