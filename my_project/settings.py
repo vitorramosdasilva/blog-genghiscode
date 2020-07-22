@@ -116,7 +116,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-DATABASES['default'] = dj_database_url.parse('postgres://lyxyddsxzirukw:626edb6da9450520320c7bf8caf26e3e47e7998dd0cc44b3594c838378abd436@ec2-18-235-109-97.compute-1.amazonaws.com:5432/d2j8pckd7ip2vr', conn_max_age=600)
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# DATABASES['default'] = dj_database_url.parse('postgres://lyxyddsxzirukw:626edb6da9450520320c7bf8caf26e3e47e7998dd0cc44b3594c838378abd436@ec2-18-235-109-97.compute-1.amazonaws.com:5432/d2j8pckd7ip2vr', conn_max_age=600)
 
 # db_from_env = dj_database_url.config(conn_max_age=600)
 # DATABASES['default'].update(db_from_env)
