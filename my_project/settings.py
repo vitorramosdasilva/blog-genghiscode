@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,8 +27,8 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-# SECRET_KEY = os.environ.get ('SECRET_KEY') 
-SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
+SECRET_KEY = os.environ.get ('SECRET_KEY') 
+# SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
 # EMAIL_HOST_USER = os.environ.get ('EMAIL_HOST_USER') 
 # EMAIL_HOST_PASSWORD = os.environ.get ('EMAIL_HOST_PASSWORD')
 
@@ -127,9 +128,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-DATABASES = {
-    'default': dj_database_url.config()
-}
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
+# DATABASES = {
+#     'default': dj_database_url.config()
+# }
 
 # DATABASES = {
 #     'default': {
@@ -150,6 +154,8 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+# STATICFILES_DIRS = [os.path.join(BASE_DIR,'my_project/static')
+# ]
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
