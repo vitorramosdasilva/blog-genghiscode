@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     # 'widget_tweaks',
-    'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -130,12 +130,14 @@ USE_TZ = True
 
 # db_from_env = dj_database_url.config(conn_max_age=600)
 # DATABASES['default'].update(db_from_env)
-DATABASES = { 'default': dj_database_url.config() }
+# DATABASES = { 'default': dj_database_url.config() }
 
-# DATABASES = {
-#     'default': dj_database_url.config()A
-# }
+# Em Produção ....
+DATABASES = {
+    'default': dj_database_url.config()
+}
 
+# Em Dev ....
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -151,21 +153,21 @@ DATABASES = { 'default': dj_database_url.config() }
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-# STATIC_URL = '/static/'
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-MEDIA_URL = '/media/'
+# Em Dev .....
 STATIC_URL = '/static/'
-#location where django collect all static files
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
-# location where you will store your static files
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'my_project/staticfiles')
-]
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
+# Em produção ....
+# MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+# MEDIA_URL = '/media/'
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR,'static')
+# STATICFILES_DIRS = [os.path.join(BASE_DIR,'my_project/staticfiles')]
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 CKEDITOR_UPLOAD_PATH = "uploads/"
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
