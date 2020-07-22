@@ -24,12 +24,16 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 # #### Removido SECURITY KEY
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
+
+
+SECRET_KEY = os.environ.get ('SECRET_KEY') 
+# EMAIL_HOST_USER = os.environ.get ('EMAIL_HOST_USER') 
+# EMAIL_HOST_PASSWORD = os.environ.get ('EMAIL_HOST_PASSWORD')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'blog-genghiscode.herokuapp.com']
 
 
 # Application definition
@@ -47,6 +51,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     # 'widget_tweaks',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -120,6 +125,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+db_from_env = dj_database_url.config (conn_max_age = 600) 
+DATABASES ['default']. update (db_from_env)
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -142,10 +150,5 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-try:
-    from .local_settings import *
-except ImportError:
-    pass
