@@ -1,5 +1,5 @@
-from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
 
 # Create your views here.
 from my_app.forms import PesquisaForm
@@ -35,15 +35,19 @@ def category(request, pk):
 
 def pesquisa(request):
     # success = False
-    form = PesquisaForm(request.POST or None)
-    if form.is_valid():
-        procura = form.cleaned_data['pesquisa']
-        posts = Post.objects.filter(content__contains=procura)
-    context = {
-        'form': form,
-        'posts': posts,
-    }
-    return render(request, 'home.html', context)
+    if request.method == 'GET':
+        form = PesquisaForm()
+        return render(request, "home.html", {'form': form})
+    else:
+        form = PesquisaForm(request.POST)
+        if form.is_valid():
+            procura = form.cleaned_data['pesquisa']
+            posts = Post.objects.filter(content__icontains=procura)
+        context = {
+            'form': form,
+            'posts': posts,
+        }
+        return render(request, 'home.html', context)
 
 
 def error_400(request, exception):
