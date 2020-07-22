@@ -23,6 +23,8 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # #### Removido SECURITY KEY
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
