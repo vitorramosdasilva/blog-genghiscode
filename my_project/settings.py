@@ -16,8 +16,8 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-SECRET_KEY = os.environ.get ('SECRET_KEY') 
-# SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
+# SECRET_KEY = os.environ.get ('SECRET_KEY') 
+SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
 # EMAIL_HOST_USER = os.environ.get ('EMAIL_HOST_USER') 
 # EMAIL_HOST_PASSWORD = os.environ.get ('EMAIL_HOST_PASSWORD')
 
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     # 'widget_tweaks',
-    # 'whitenoise.runserver_nostatic',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -121,18 +121,10 @@ USE_TZ = True
 DATABASES = { 
     'default': dj_database_url.config()
 }
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 # DATABASES = { 'default': dj_database_url.config(conn_max_age=500) }
-# DATABASES['default'] = dj_database_url.parse('postgres://lyxyddsxzirukw:626edb6da9450520320c7bf8caf26e3e47e7998dd0cc44b3594c838378abd436@ec2-18-235-109-97.compute-1.amazonaws.com:5432/d2j8pckd7ip2vr', conn_max_age=600)
 
 # db_from_env = dj_database_url.config(conn_max_age=600)
 # DATABASES['default'].update(db_from_env)
-# DATABASES = { 'default': dj_database_url.config() }
-
-# Em Produção ....
-# DATABASES = {
-#     'default': dj_database_url.config()
-# }
 
 # Em Dev ....
 # DATABASES = {
@@ -146,8 +138,6 @@ DATABASES = {
 #     }
 # }
 
-# db_from_env = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -164,7 +154,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 # STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR,'static')
 # STATICFILES_DIRS = [os.path.join(BASE_DIR,'my_project/staticfiles')]
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 CKEDITOR_UPLOAD_PATH = "uploads/"
