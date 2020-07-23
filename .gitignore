@@ -2,8 +2,11 @@
 *.log
 *.pot
 *.pyc
-*.env
-venv/
-db.sqlite3
-__pycache__/
 local_settings.py
+*.pyc
+*~
+__pycache__
+venv
+db.sqlite3
+/static
+.DS_Store
