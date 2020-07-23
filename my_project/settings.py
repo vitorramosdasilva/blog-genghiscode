@@ -23,9 +23,9 @@ SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'blog-genghiscode.herokuapp.com']
+# ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'blog-genghiscode.herokuapp.com']
 
 
 # Application definition
@@ -154,10 +154,17 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 # STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR,'static')
 # STATICFILES_DIRS = [os.path.join(BASE_DIR,'my_project/staticfiles')]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 django_heroku.settings(locals())
+
+# if ON_HEROKU:
+#     DATABASE_URL = 'postgresql://<postgresql>'
+# else:
+#     DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+
+# DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 
