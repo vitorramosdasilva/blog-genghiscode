@@ -43,12 +43,12 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     # 'widget_tweaks',
-    'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # em produção ...
+    # 'whitenoise.middleware.WhiteNoiseMiddleware', # em produção ...
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -152,8 +152,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 ADMIN_MEDIA_PREFIX = '/static/admin/'
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_RESTRICT_BY_USER = True
 
