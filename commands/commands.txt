@@ -47,3 +47,10 @@ heroku addons:create heroku-postgresql:hobby-dev
 
 heroku run python manage.py migrate
 heroku run python manage.py createsuperuser
+
+git add --all .
+git commit -m "My Django Girls app, first commit"
+git push -u origin master
+
+.pythonanywhere.com/pages/API
+8ca824aaabbb6daf1408b9f74914abb3ea8b52cd
