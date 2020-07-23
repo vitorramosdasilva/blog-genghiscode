@@ -1,6 +1,6 @@
 import os
 import dj_database_url
-import django_heroku
+# import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -118,8 +118,14 @@ USE_L10N = True
 USE_TZ = True
 
 # Produção ....
-DATABASES = { 
-    'default': dj_database_url.config()
+# DATABASES = {
+#     'default': dj_database_url.config()
+# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
+    }
 }
 # DATABASES = { 'default': dj_database_url.config(conn_max_age=500) }
 
@@ -158,7 +164,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 CKEDITOR_UPLOAD_PATH = "uploads/"
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # if ON_HEROKU:
