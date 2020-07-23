@@ -23,9 +23,9 @@ SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'blog--genghiscode.herokuapp.com']
+# ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'blog--genghiscode.herokuapp.com']
 
 
 # Application definition
@@ -118,10 +118,10 @@ USE_L10N = True
 USE_TZ = True
 
 # Produção ....
-DATABASES = {
-    'default': dj_database_url.config()
-}
-django_heroku.settings(locals())
+# DATABASES = {
+#     'default': dj_database_url.config()
+# }
+# django_heroku.settings(locals())
 
 # Python Whenere ..
 # DATABASES = {
@@ -131,16 +131,16 @@ django_heroku.settings(locals())
 #     }
 # }
 # Em Dev ....
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'blog',
-#         'USER': 'root',
-#         'PASSWORD': 'root',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }S
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'blog',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 
 # Static files (CSS, JavaScript, Images)
