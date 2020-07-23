@@ -121,17 +121,13 @@ USE_TZ = True
 # DATABASES = {
 #     'default': dj_database_url.config()
 # }
+# Python Whenere ..
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-# DATABASES = { 'default': dj_database_url.config(conn_max_age=500) }
-
-# db_from_env = dj_database_url.config(conn_max_age=600)
-# DATABASES['default'].update(db_from_env)
-
 # Em Dev ....
 # DATABASES = {
 #     'default': {
@@ -162,10 +158,14 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 # STATICFILES_DIRS = [os.path.join(BASE_DIR,'my_project/staticfiles')]
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_RESTRICT_BY_USER = True
 # django_heroku.settings(locals())
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # if ON_HEROKU:
 #     DATABASE_URL = 'postgresql://<postgresql>'

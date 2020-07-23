@@ -54,3 +54,4 @@ git push -u origin master
 
 .pythonanywhere.com/pages/API
 8ca824aaabbb6daf1408b9f74914abb3ea8b52cd
+heroku logs --tail
