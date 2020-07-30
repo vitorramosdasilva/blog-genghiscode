@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from .models import Category
+from blog.models import Category
 
 
 def categories(request):

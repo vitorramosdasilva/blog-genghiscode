@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 ('content', ckeditor_uploader.fields.RichTextUploadingField()),
                 ('created_at', models.DateField(auto_now_add=True)),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='my_app.Category')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='blog.Category')),
             ],
         ),
     ]

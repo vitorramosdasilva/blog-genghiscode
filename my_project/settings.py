@@ -22,7 +22,7 @@ SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
 # EMAIL_HOST_PASSWORD = os.environ.get ('EMAIL_HOST_PASSWORD')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'blog--genghiscode.herokuapp.com']
@@ -38,10 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Apps ..
-    'my_app',
+    'blog',
+    'categoria',
     # Libs
     'ckeditor',
-    'ckeditor_uploader',
+    # 'ckeditor_uploader',
     # 'widget_tweaks',
     # 'whitenoise.runserver_nostatic',
 ]
@@ -63,7 +64,7 @@ ROOT_URLCONF = 'my_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,7 +73,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 # apps
-                'my_app.context_processors.categories',
+                'blog.context_processors.categories',
             ],
         },
     },
@@ -142,23 +143,42 @@ DATABASES = {
 #     }
 # }
 
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = 'media'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-# Em Dev .....
+# Prod PythonAnyWhere
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 ADMIN_MEDIA_PREFIX = '/static/admin/'
-#
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_UPLOAD_PATH = "media/uploads/"
 CKEDITOR_RESTRICT_BY_USER = True
+STATICFILES_DIRS = [
+    'statics'
+]
+
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+# Em Dev .....
+# STATIC_URL = '/static/'
+# MEDIA_URL = '/mediSa/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# CKEDITOR_UPLOAD_PATH = "uploads/"
+# CKEDITOR_RESTRICT_BY_USER = True
 
 # if ON_HEROKU:
 #     DATABASE_URL = 'postgresql://<postgresql>'

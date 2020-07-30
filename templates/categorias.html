@@ -8,7 +8,7 @@
                 <ul class="list-unstyled mb-0">
                   {% for categoria in categories %}
                   <li>
-                    <a href="{% url 'category' pk=categoria.pk %}">{{ categoria }}</a>
+                    <a href="{% url 'post_category' pk=categoria.pk %}">{{ categoria }}</a>
                   </li>
                   {% endfor %}
                 </ul>
