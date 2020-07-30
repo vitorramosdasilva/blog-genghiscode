@@ -163,9 +163,9 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 CKEDITOR_UPLOAD_PATH = "media/uploads/"
 CKEDITOR_RESTRICT_BY_USER = True
-STATICFILES_DIRS = [
-    'statics'
-]
+# STATICFILES_DIRS = [
+#     'statics'
+# ]
 
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
