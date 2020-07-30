@@ -22,12 +22,10 @@ SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
 # EMAIL_HOST_PASSWORD = os.environ.get ('EMAIL_HOST_PASSWORD')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 # ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'blog--genghiscode.herokuapp.com']
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,7 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware', # em produção ...
+    'whitenoise.middleware.WhiteNoiseMiddleware', # em produção ...
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -125,23 +123,23 @@ USE_TZ = True
 # django_heroku.settings(locals())
 
 # Python Whenere ..
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-# Em Dev ....
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'blog',
-#         'USER': 'root',
-#         'PASSWORD': 'root',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+# Em Dev ....
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'blog',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = 'media'
