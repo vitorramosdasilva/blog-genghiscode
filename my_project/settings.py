@@ -16,8 +16,8 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-# SECRET_KEY = os.environ.get ('SECRET_KEY') 
-SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
+SECRET_KEY = os.environ.get ('SECRET_KEY') 
+# SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
 # EMAIL_HOST_USER = os.environ.get ('EMAIL_HOST_USER') 
 # EMAIL_HOST_PASSWORD = os.environ.get ('EMAIL_HOST_PASSWORD')
 
@@ -117,10 +117,10 @@ USE_L10N = True
 USE_TZ = True
 
 # Produção ....
-# DATABASES = {
-#     'default': dj_database_url.config()
-# }
-# django_heroku.settings(locals())
+DATABASES = {
+    'default': dj_database_url.config()
+}
+django_heroku.settings(locals())
 
 # Python Whenere ..
 # DATABASES = {
@@ -131,16 +131,16 @@ USE_TZ = True
 # }
 
 # Em Dev ....
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'blog',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'blog',
+#         'USER': 'root',
+#         'PASSWORD': 'root',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = 'media'
@@ -161,7 +161,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 ADMIN_MEDIA_PREFIX = '/static/admin/'
-CKEDITOR_UPLOAD_PATH = "media/uploads/"
+CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_RESTRICT_BY_USER = True
 # STATICFILES_DIRS = [
 #     'statics'
