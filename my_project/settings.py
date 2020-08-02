@@ -16,8 +16,8 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-SECRET_KEY = os.environ.get ('SECRET_KEY') 
-# SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
+# SECRET_KEY = os.environ.get ('SECRET_KEY')
+SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
 # EMAIL_HOST_USER = os.environ.get ('EMAIL_HOST_USER') 
 # EMAIL_HOST_PASSWORD = os.environ.get ('EMAIL_HOST_PASSWORD')
 
@@ -146,9 +146,6 @@ django_heroku.settings(locals())
 # MEDIA_ROOT = 'media'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
@@ -158,16 +155,23 @@ LOGOUT_REDIRECT_URL = 'home'
 
 # Prod PythonAnyWhere
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = (
+    os.path.join(BASE_DIR, 'media')
+)
+
 ADMIN_MEDIA_PREFIX = '/static/admin/'
-CKEDITOR_UPLOAD_PATH = "uploads/"
+# CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_RESTRICT_BY_USER = True
-# STATICFILES_DIRS = [
-#     'statics'
-# ]
 
+STATICFILES_DIRS = [
+    'statics'
+]
 
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Em Dev .....

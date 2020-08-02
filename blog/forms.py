@@ -17,7 +17,7 @@ class Postform(forms.ModelForm):
     conteudo = forms.CharField(widget=CKEditorWidget())
     class Meta:
         model = Post
-        fields = ('title','summary','content','author','category','imagem')
+        fields = ('title','summary','content','author','category','imagem',)
 #         title = models.CharField(max_length=255)
 #         created_at
 
