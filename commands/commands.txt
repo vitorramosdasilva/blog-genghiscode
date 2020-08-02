@@ -66,7 +66,9 @@ git push -u origin master
 8ca824aaabbb6daf1408b9f74914abb3ea8b52cd
 heroku logs --tail
 
-pip3.6 install genghiscode django-ckeditor
+# pip3.6 install genghiscode django-ckeditor
+
+pip3.6 install --user pythonanywhere
 pa_autoconfigure_django.py https://github.com/vitorramosdasilva/Blog.git
 
 CKEDITOR_UPLOAD_PATH

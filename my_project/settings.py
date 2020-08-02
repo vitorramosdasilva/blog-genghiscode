@@ -16,17 +16,18 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
 
-# SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
 # EMAIL_HOST_USER = os.environ.get ('EMAIL_HOST_USER') 
 # EMAIL_HOST_PASSWORD = os.environ.get ('EMAIL_HOST_PASSWORD')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') == True
-ALLOWED_HOSTS = ['https://blog-genghiscode.herokuapp.com']
+DEBUG = False
+# DEBUG = os.environ.get('DEBUG') == True
 
-# ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'blog--genghiscode.herokuapp.com']
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'https://blog-genghiscode.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
@@ -48,7 +49,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # em produção ...
+    # 'whitenoise.middleware.WhiteNoiseMiddleware', # em produção ...
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -118,30 +119,30 @@ USE_L10N = True
 USE_TZ = True
 
 # Produção ....
-DATABASES = {
-    'default': dj_database_url.config()
-}
-django_heroku.settings(locals())
+# DATABASES = {
+#     'default': dj_database_url.config()
+# }
+# django_heroku.settings(locals())
 
 # Python Whenere ..
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
-# Em Dev ....
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'blog',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# Em Dev ....
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'blog',
+#         'USER': 'root',
+#         'PASSWORD': 'root',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = 'media'
