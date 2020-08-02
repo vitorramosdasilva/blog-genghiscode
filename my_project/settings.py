@@ -168,9 +168,9 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 # CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_RESTRICT_BY_USER = True
 
-STATICFILES_DIRS = [
-    'statics'
-]
+# STATICFILES_DIRS = [
+#     'statics'
+# ]
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
