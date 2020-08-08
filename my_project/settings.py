@@ -16,8 +16,8 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-# SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
+SECRET_KEY = os.environ.get('SECRET_KEY')
+# SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
 
 # EMAIL_HOST_USER = os.environ.get ('EMAIL_HOST_USER') 
 # EMAIL_HOST_PASSWORD = os.environ.get ('EMAIL_HOST_PASSWORD')
@@ -26,8 +26,8 @@ SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
 DEBUG = False
 # DEBUG = os.environ.get('DEBUG') == True
 
-# ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'https://vitorramos.pythonanywhere.com']
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'https://vitorramos.pythonanywhere.com']
 # ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'https://blog-genghiscode.herokuapp.com']
 # Application definition
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'categoria',
     # Libs
     'ckeditor',
+    'cloudinary',
     # 'ckeditor_uploader',
     # 'widget_tweaks',
     # 'whitenoise.runserver_nostatic',
@@ -120,18 +121,18 @@ USE_L10N = True
 USE_TZ = True
 
 # Produção ....
-# DATABASES = {
-#     'default': dj_database_url.config()
-# }
-# django_heroku.settings(locals())
+DATABASES = {
+    'default': dj_database_url.config()
+}
+django_heroku.settings(locals())
 
 # Python Whenere ..
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 # Em Dev ....
 # DATABASES = {
@@ -168,7 +169,7 @@ MEDIA_ROOT = (
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_RESTRICT_BY_USER = True
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # STATICFILES_DIRS = [
 #     'statics'
@@ -177,6 +178,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+CLOUDINARY = {
+    'cloud_name': 'heroku-image-genghiscode',
+    'api_key': '198194936266624',
+    'api_secret': 'Sufk2LuruqBR3NXljQ6fvCK6XUY'
+}
 
 # Em Dev .....
 # STATIC_URL = '/static/'

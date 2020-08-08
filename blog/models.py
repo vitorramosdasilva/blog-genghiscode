@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.html import mark_safe
 from django.urls import reverse
+from cloudinary.models import CloudinaryField
 
 
 class Category(models.Model):
@@ -21,7 +22,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.PROTECT)
     created_at = models.DateField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    imagem = models.ImageField(upload_to="uploads/", blank=True, null=True)
+    imagem = CloudinaryField('imagem')
 
     def get_absolute_url_update(self):
         return reverse('post_edit', args=[self.pk])
