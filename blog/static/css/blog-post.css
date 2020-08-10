@@ -6,3 +6,12 @@
 body {
   padding-top: 56px;
 }
+
+.pagination {
+  margin-bottom: 20px;
+  justify-content: center;
+
+}
+.auth-card {
+  margin-bottom: 30px;
+}

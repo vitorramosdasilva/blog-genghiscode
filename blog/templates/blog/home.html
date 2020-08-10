@@ -19,7 +19,7 @@
       </div>
 
       <!-- Post Content Column -->
-{% for post in posts %}
+    {% for post in posts %}
       <div class="col-lg-8">
 
         <!-- Title -->
@@ -47,14 +47,34 @@
         <!--        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">-->
 
         <hr>
+        
+
 
       </div>
-      {% endfor %}
-
-
-
+    {% endfor %}
+      
+    
     </div>
     <!-- /.row -->
+   
+    <div class="pagination">
+        <span class="step-links">
+            {% if posts.has_previous %}
+                <a href="?page={{ posts.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
+            {% endif %}
+            
+            {% if posts.paginator.num_pages %}
+            <span class="current">
+                {{ posts.number }} de {{ posts.paginator.num_pages }}
+            </span>
+            {% endif %}
+        
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
+            {% endif %}
+        </span>
+    </div>
+ 
 
   </div>
   <!-- /.container -->

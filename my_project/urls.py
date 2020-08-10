@@ -4,18 +4,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from blog import views
 
-# from blog.views import pesquisaView
-# from . views import pesquisaView
 
 urlpatterns = [
     path('', include('blog.urls')),
     path('categoria/', include('categoria.urls')),
     path('admin/', admin.site.urls),
     path('pesquisa/', views.pesquisa, name='pesquisa'),
+    path('accounts/', include('accounts.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler50x = 'blog.views.error_500'
 handler404 = 'blog.views.error_404'
@@ -28,3 +26,6 @@ handler400 = 'blog.views.error_400'
 # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # path('procura/<slug:slug>/', views.post_slug, name='post_slug'),
 # path('procura/<content:content>', pesquisaView, name='pesquisa'),
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

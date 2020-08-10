@@ -27,8 +27,8 @@ DEBUG = False
 # DEBUG = os.environ.get('DEBUG') == True
 
 ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'https://vitorramos.pythonanywhere.com']
-# ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'https://blog-genghiscode.herokuapp.com']
+# ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'https://xxxxx.pythonanywhere.com']
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     # Libs
     'ckeditor',
     'cloudinary',
+    'crispy_forms',
+    'accounts',
     # 'ckeditor_uploader',
     # 'widget_tweaks',
     # 'whitenoise.runserver_nostatic',
@@ -66,7 +68,7 @@ ROOT_URLCONF = 'my_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,8 +122,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-
 # Python Whenere ..
 DATABASES = {
     'default': {
@@ -151,10 +151,6 @@ DATABASES['default'].update(db_from_env)
 #     }
 # }
 
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = 'media'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
@@ -164,14 +160,12 @@ DATABASES['default'].update(db_from_env)
 
 # Prod PythonAnyWhere
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # MEDIA_URL = '/media/'
-# MEDIA_ROOT = (
-#     os.path.join(BASE_DIR, 'media')
-# )
-
+# MEDIA_ROOT = 'media'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # CKEDITOR_UPLOAD_PATH = "uploads/"
 # CKEDITOR_RESTRICT_BY_USER = True
@@ -181,8 +175,8 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 #     'statics'
 # ]
 
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CLOUDINARY = {
@@ -190,6 +184,8 @@ CLOUDINARY = {
     'api_key': '198194936266624',
     'api_secret': 'Sufk2LuruqBR3NXljQ6fvCK6XUY'
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Em Dev .....
 # STATIC_URL = '/static/'

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -6,17 +7,21 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import CreateView
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 
 # Create your views here.
 from blog.forms import PesquisaForm, Postform
 from blog.models import Post
 
-
+@login_required
 def home(request):
-    posts = Post.objects.all()
+    posts_list = Post.objects.all()
+    paginator = Paginator(posts_list, 3)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
     return render(request, 'blog/home.html', {'posts': posts})
 
-
+@login_required
 def post_details(request, pk):
     posts = Post.objects.get(pk=pk)
     return render(request, 'blog/post_details.html', {'posts': posts})
