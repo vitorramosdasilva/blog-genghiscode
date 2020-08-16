@@ -180,9 +180,9 @@ LOGOUT_REDIRECT_URL = '/'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CLOUDINARY = {
-    'cloud_name': 'heroku-image-genghiscode',
-    'api_key': '198194936266624',
-    'api_secret': 'Sufk2LuruqBR3NXljQ6fvCK6XUY'
+    'cloud_name': os.environ.get('cloud_name'),
+    'api_key': os.environ.get('api_key'),
+    'api_secret': os.environ.get('api_secret')
 }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

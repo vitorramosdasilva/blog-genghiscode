@@ -39,6 +39,8 @@
         <p>{{ posts.created_at|date:'d, M Y' }}</p>
 
         <hr>
+        <img src="{{ posts.imagem.url }}" alt="image-{{post.title}}" width="500px" />
+        <hr>
 
         <!-- Preview Image -->
          <!-- Post Summary -->
@@ -50,7 +52,7 @@
         <h4>Conteudo</h4>
          <!-- Post Content  -->
         {{ posts.content|safe }}
-        <img src="{{ posts.imagem.url }}" alt="image-{{post.title}}" width="700px" />
+        
 
 
 
