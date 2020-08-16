@@ -16,8 +16,7 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-# SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = '&q_u05&=5+k36)*#n85*3-m)yi%94w#=9wx^v@a+dtb^n9r+i&'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # EMAIL_HOST_USER = os.environ.get ('EMAIL_HOST_USER') 
 # EMAIL_HOST_PASSWORD = os.environ.get ('EMAIL_HOST_PASSWORD')
@@ -203,4 +202,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #     DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 
 # DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
 
