@@ -13,7 +13,7 @@ from django.core.paginator import Paginator
 from blog.forms import PesquisaForm, Postform
 from blog.models import Post
 
-@login_required
+# @login_required
 def home(request):
     posts_list = Post.objects.all()
     paginator = Paginator(posts_list, 3)
@@ -21,7 +21,7 @@ def home(request):
     posts = paginator.get_page(page)
     return render(request, 'blog/home.html', {'posts': posts})
 
-@login_required
+# @login_required
 def post_details(request, pk):
     posts = Post.objects.get(pk=pk)
     return render(request, 'blog/post_details.html', {'posts': posts})

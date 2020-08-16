@@ -176,7 +176,8 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 # ]
 
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/accounts/login'
+LOGOUT_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/accounts/login'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CLOUDINARY = {
