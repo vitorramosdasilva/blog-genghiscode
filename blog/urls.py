@@ -1,17 +1,18 @@
 from django.urls import path
+from .views import PostDetailView, PostListView, PostCreateView, PostUpdateView, PostDeleteView, CommentDeleteView
 
-from . import views
-
+# app_name = 'blog'
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('post_details/<int:pk>/', views.post_details, name='post_details'),
+    # path('', home, name='blog-home'),
+    path('', PostListView.as_view(), name='blog-home'),
+    path('post/<int:pk>/', PostDetailView, name='post-detail'),
+    path('post/new/', PostCreateView, name='post-create'),
+
+    path('post/<int:pk>/update', PostUpdateView, name='post-update'),
+    path('comment/<int:pk>/update', PostUpdateView, name='post-comment'),
+
+    path('post/<int:pk>/delete', PostDeleteView, name='post-delete'),
+    path('comment/<int:pk>/delete', CommentDeleteView, name='comment-delete')
+
+
 ]
-
-# path('post/new/', views.PostCreateView.as_view(), name='post_new'),
-# path('post/<int:pk>/edit/', views.PostUpdateView.as_view(), name='post_edit'),
-# path('post/<int:pk>/delete/', views.PostDeleteView.as_view(), name='post_delete'),
-
-# path('', views.BlogListView.as_view(), name='home'),
-# path('post/teste/', views.hello, name='hello'),
-# path('post/<slug:slug>/', views.PostDetailView.as_view(), name='post_detail'),
-# path('', views.BlogListView.as_view(), name='home'),

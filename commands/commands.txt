@@ -46,6 +46,9 @@ pip3 freeze > requirements.txt
 
 
 # migrar dados local para Heroku ...
+#reset database ...
+horoku pg:reset
+#migrar dados ...
 PGUSER=root PGPASSWORD=root heroku pg:push postgres://localhost/blog  postgresql-trapezoidal-56012
 
 heroku addons:create heroku-postgresql:hobby-dev

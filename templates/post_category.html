@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}<title>Blog</title>{% endblock %}
+{% block title %}Blog{% endblock %}
 
 {% block content %}
 
@@ -16,6 +16,10 @@
         <!-- Categories Widget -->
         {% include 'categorias.html' %}
 
+
+         <!-- Categories Widget -->
+        {% include 'crud.html' %}
+
       </div>
 
       <!-- Post Content Column -->
@@ -24,7 +28,7 @@
 
         <!-- Title -->
 
-        <h1 class="mt-4"><a href="{% url 'post_details' pk=post.pk %}">{{ post.title }}</a></h1>
+        <h1 class="mt-4"><a href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a></h1>
 
         <!-- Author -->
         <p class="lead">

@@ -1,32 +1,15 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic.edit import CreateView
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-from django.core.paginator import Paginator
 
 # Create your views here.
-from blog.forms import PesquisaForm, Postform
-from blog.models import Post
+from blog.forms import PesquisaForm, Postform, CommentForm
+from blog.models import Post, Comment
+from django.views.generic import View
+from django.shortcuts import render, redirect, get_object_or_404
+
 
 # @login_required
-def home(request):
-    posts_list = Post.objects.all()
-    paginator = Paginator(posts_list, 3)
-    page = request.GET.get('page')
-    posts = paginator.get_page(page)
-    return render(request, 'blog/home.html', {'posts': posts})
-
-# @login_required
-def post_details(request, pk):
-    posts = Post.objects.get(pk=pk)
-    return render(request, 'blog/post_details.html', {'posts': posts})
-
-
 def pesquisa(request):
     # success = False
     if request.method == 'GET':
@@ -37,84 +20,127 @@ def pesquisa(request):
         if form.is_valid():
             procura = form.cleaned_data['pesquisa']
             posts = Post.objects.filter(content__icontains=procura)
-        context = {
-            'form': form,
-            'posts': posts,
-        }
+            context = {
+                'form': form,
+                'posts': posts,
+            }
         return render(request, 'blog/home.html', context)
 
 
+class PostListView(ListView):
+    model = Post
+    template_name = 'blog/home.html'
+    context_object_name = 'posts'
+    ordering = ['-created_at']
+    paginate_by = 5
+
+
+@login_required
+def PostDetailView(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    comments = post.comments.filter(active=True)
+    new_comment = CommentForm()
+    if request.method == "POST":
+        form = CommentForm(data=request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.user = request.user
+            new_comment.post = post
+            new_comment.save()
+    else:
+        form = CommentForm()
+    return render(request, 'blog/post_detail.html', {'form_comment': form,
+                                                     'new_coment': new_comment,
+                                                     'post': post,
+                                                     'comments': comments
+                                                     })
+
+
+@login_required
+def PostCreateView(request):
+    if request.method == 'POST':
+        form = Postform(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('post-detail', pk=post.pk)
+
+    else:
+        form = Postform()
+    return render(request, 'blog/post_create.html', {'form': form})
+
+
+@login_required
+def PostUpdateView(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = Postform(request.POST, instance=post)
+        if form.is_valid():
+            if request.user == post.author:
+                post = form.save(commit=False)
+                post.author = request.user
+                post.save()
+                return redirect('post-detail', pk=post.pk)
+    else:
+        form = Postform(instance=post)
+    return render(request, 'blog/post_edit.html', {'form': form})
+
+
+@login_required
+def CommentUpdateView(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            if request.user == comment.author:
+                comment = form.save(commit=False)
+                comment.author = request.user
+                comment.save()
+                return redirect('post-detail', pk=comment.pk)
+
+
+@login_required
+def PostDeleteView(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = C(request.POST, instance=post)
+        if form.is_valid():
+            if request.user == post.author:
+                Post.delete()
+                messages.success(request, 'Post delete successfully')
+                return redirect('blog-home')
+    else:
+        form = Postform(instance=post)
+    return render(request, 'blog/post_delete.html', {'form': form})
+
+
+@login_required
+def CommentDeleteView(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            if request.user == comment.author:
+                comment.delete()
+                messages.success(request, 'Comentário deletado com sucesso')
+                return redirect('blog-home')
+    else:
+        form = Postform(instance=comment)
+    return render(request, 'blog/comment_delete.html', {'form': form})
+
+
 def error_400(request, exception):
-    return render(request, '400.html', status=400)
+    return render(request, 'erro/400.html', status=400)
 
 
 def error_403(request, exception):
-    return render(request, '403.html', status=403)
+    return render(request, 'erro/403.html', status=403)
 
 
 def error_404(request, exception):
-    return render(request, '404.html', status=404)
+    return render(request, 'erro/404.html', status=404)
 
 
 def error_50x(request, exception):
-    return render(request, '500.html', status=500)
-
-# def post_slug(request, slug):
-#     posts = Post.objects.get(slug=slug)
-#     context = {
-#         'posts': posts
-#     }
-#     return render(request, 'catalog/product.html', context)
-
-# class PostCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-# class PostUpdateView(LoginRequiredMixin,SuccessMessageMixin,UpdateView):
-# class PostDeleteView(LoginRequiredMixin,SuccessMessageMixin,DeleteView):
-
-# class PostCreateView(SuccessMessageMixin, CreateView):
-#     model = Post
-#     template_name = 'blog/post_new.html'
-#     form_class = Postform
-#     success_message = "%(field)s - criado com sucesso"
-#
-#     def form_valid(self, form):
-#         obj = form.save(commit=False)
-#         obj.autor = self.request.user
-#         obj.save()
-#         return super().form_valid(form)
-#
-#     def get_success_message(self, cleaned_data):
-#         return self.success_message % dict(
-#             cleaned_data,
-#             field=self.object.titulo,
-#         )
-#
-#
-# class PostUpdateView(SuccessMessageMixin, UpdateView):
-#     model = Post
-#     form_class = Postform
-#     template_name = 'blog/post_edit.html'
-#     # fields = ('summary','content')
-#     success_message = "%(field)s - alterado com sucesso"
-#
-#     def form_valid(self, form):
-#         obj = form.save(commit=False)
-#         obj.autor = self.request.user
-#         obj.save()
-#         return super().form_valid(form)
-#
-#     def get_success_message(self, cleaned_data):
-#         return self.success_message % dict(
-#             cleaned_data,
-#             field=self.object.titulo,
-#         )
-#
-#
-# class PostDeleteView(SuccessMessageMixin, DeleteView):
-#     model = Post
-#     template_name = 'blog/post_delete.html'
-#     success_url = reverse_lazy('home')
-#     success_message = "Deletado com sucesso"
-#
-#     def delete(self, request, *args, **kwargs):
-#         messages.success(self.request, self.success_message)
-#         return super(PostDeleteView, self).delete(request, *args, **kwargs)
+    return render(request, 'erro/500.html', status=500)
