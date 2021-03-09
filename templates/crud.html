@@ -1,0 +1,19 @@
+{% load static %}
+   <!-- Ações Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Ações</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  {% if user.is_authenticated and user == post.author %}
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                  <a class="btn btn-danger btn-sm" href="{% url 'post-delete' pk=post.pk %}" role="button">Excluir</a>
+                  <a class="btn btn-success btn-sm" href="{% url 'post-update' pk=post.pk %}" role="button">Alterar</a>
+                  {% endif %}
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>

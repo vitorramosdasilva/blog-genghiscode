@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Blog - Editar Postagem {% endblock title %}
+{% load cloudinary %}
+{% load widget_tweaks %}
+{% block content %}
+
+    <div class="row mt-3">
+        <div class="col-lg-4 mx-auto mt-5">
+            <h1>Criar Post</h1>
+        </div>
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+
+         {% csrf_token %}
+
+         {% for error in form.non_field_errors %}
+             <div class="alert alert-danger">{{ error }}</div>
+          {% endfor %}
+
+        <div class="row">
+            <div class="col-lg-4 mx-auto mb-5 mt-5">
+
+                 <div class="form-group{% if form.title.errors %} has-error {% endif %}">
+                    <label for="{{ form.title.auto_id }}"> {{ form.title.label }}:</label>
+                    {% render_field form.title class="form-control form-control-sm" %}
+                </div>
+                <div class="form-group{% if form.summary.errors %} has-error {% endif %}">
+                    <label for="{{ form.summary.auto_id }}"> {{ form.summary.label }}:</label>
+                    {% render_field form.summary class="form-control form-control-sm" %}
+                </div>
+
+               <div class="form-group{% if form.content.errors %} has-error {% endif %}">
+                    <label for="{{ form.content.auto_id }}"> {{ form.content.label }}:</label>
+                    {% render_field form.content class="form-control form-control-sm" %}
+               </div>
+
+               <div class="form-group{% if form.category.errors %} has-error {% endif %}">
+                    <label for="{{ form.category.auto_id }}"> {{ form.category.label }}:</label>
+                    {% render_field form.category class="form-control form-control-sm" %}
+               </div>
+
+               <div class="form-group{% if form.imagem.errors %} has-error {% endif %}">
+                    <label for="{{ form.imagem.auto_id }}"> {{ form.imagem.label }}:</label>
+                    {% render_field form.imagem class="form-control" %}
+               </div>
+                 <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+
+    </form>
+{% endblock content %}

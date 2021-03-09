@@ -20,12 +20,6 @@ handler404 = 'blog.views.error_404'
 handler403 = 'blog.views.error_403'
 handler400 = 'blog.views.error_400'
 
-# path('ckeditor/', include('ckeditor_uploader.urls')),
-# path('', views.home, name='home'),
-# path('post_details/<int:pk>/', views.post_details, name='post_details'),
-# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-# path('procura/<slug:slug>/', views.post_slug, name='post_slug'),
-# path('procura/<content:content>', pesquisaView, name='pesquisa'),
 
 # if settings.DEBUG:
 #     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

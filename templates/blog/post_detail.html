@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}Blog - Detalhe{% endblock %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+  <div class="container mt-5">
+
+    <div class="row">
+          <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+        <!-- Search Widget -->
+        {% include 'procura.html' %}
+
+        <!-- Categories Widget -->
+        {% include 'categorias.html' %}
+
+        <!-- Categories Widget -->
+        {% include 'crud.html' %}
+
+      </div>
+
+      <!-- Post Content Column -->
+
+      <div class="col-lg-8">
+
+        <!-- Title -->
+
+        <h1 class="mt-4">{{ post.title }}</h1>
+
+        <!-- Author -->
+        <p class="lead">
+          by
+          <a href="#">{{ post.author.get_full_name }}</a>
+
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>{{ post.created_at|date:'d, M Y' }}</p>
+
+        <hr>
+        <img src="{{ post.imagem.url }}" alt="image-{{post.title}}" width="500px" />
+        <hr>
+
+        <!-- Preview Image -->
+         <!-- Post Summary -->
+        <h3>Resumo</h3>
+        {{ post.summary|safe }}
+        <!--        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">-->
+
+        <hr>
+        <h4>Conteudo</h4>
+         <!-- Post Content  -->
+        {{ post.content|safe }}
+
+        <hr>
+        <h1>Comentários</h1>
+        {% for comment in comments %}
+            <div class="comment">
+                <div class="date">{{ comment.created_date }}</div>
+                <strong>{{ comment.author.get_full_name }}</strong>
+                <p>{{ comment.texto|linebreaks }}</p>
+                {% if user.is_authenticated and user == post.author %}
+                  <p><a href="{% url 'comment-update' pk=comment.pk co}">Editar </a><a href="{% url 'comment-delete' pk=comment.pk co}">Excluir</a></p>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>Sem comentários :(</p>
+        {% endfor %}
+        <hr>
+        <h1>Novo Comentário</h1>
+        <form method="POST" class="post-form mb-5">
+          {% csrf_token %}
+           <div class="form-group{% if form_comment.texto.errors %} has-error {% endif %}">
+            <label for="{{ form_comment.texto.auto_id }}"> {{ form_comment.texto.label }}:</label>
+            {% render_field form_comment.texto class="form-control form-control-sm" %}
+           </div>
+          <button type="submit" class="save btn btn-primary">Send</button>
+        </form>
+
+
+      </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+  {% endblock %}

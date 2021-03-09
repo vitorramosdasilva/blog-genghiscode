@@ -1,6 +1,6 @@
+# from ckeditor.widgets import CKEditorWidget
 from django import forms
-from ckeditor.widgets import CKEditorWidget
-from .models import Post
+from .models import Post, Comment
 
 
 class PesquisaForm(forms.Form):
@@ -14,10 +14,36 @@ class PesquisaForm(forms.Form):
     )
 
 class Postform(forms.ModelForm):
-    conteudo = forms.CharField(widget=CKEditorWidget())
+#     conteudo = forms.CharField(widget=CKEditorWidget())
     class Meta:
-        model = Post
-        fields = ('title','summary','content','author','category','imagem',)
+        model = Post#
+        fields = 'title', 'content', 'summary', 'imagem', 'category'
+        labels = {
+            "title": "Título",
+            "summary": "Resumo",
+            "content": "Conteúdo",
+            "category": "Categoria",
+            "imagem": "Imagem"
+        }
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Título'}),
+            'summary': forms.Textarea(attrs={'placeholder': 'Resumo'}),
+            'content': forms.Textarea(attrs={'placeholder': 'Conteúdo'}),
+        }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('texto',)
+        labels = {
+            "texto":"Comentário"
+
+        }
+        widgets = {
+            'texto': forms.TextInput(attrs={'placeholder': 'Comente ...'})
+        }
 #         title = models.CharField(max_length=255)
 #         created_at
+
 

@@ -1,27 +1,28 @@
 {% extends  'base.html' %}
 {% load crispy_forms_tags %}
-
-{% block title %}<title>Entrar</title>{% endblock %}
+{% block title %}Entrar{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-4 offset-md-4">
-        <div class="card  auth-card">
+
+<div class="row my-5">
+    <div class="col-md-4 offset-md-4 mt-5">
+        <div class="card  auth-card mb-5">
             <div class="card-body">
-                <h4 class="card-title text-center">Entrar no Blog</h4>
-        
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="next" value="{{ next }}">
-        
-                    {{ form|crispy }}
+                <h4 class="card-title text-center">Entrar no DashBoard</h4>
+                 <form id="form_login" method="post">
+                     {% csrf_token %}
+                     {{ form|crispy }}
+                      <input type="hidden" name="next" value="{{ next }}">
 
                     <button type="submit" class="btn btn-primary btn-block">Entrar</button>
                 </form>
-
-                <p class="change-form-p">Quer criar uma conta? <a href="/accounts/register">Clique aqui!</a></p>
-            </div>
+                </br>
+                <p class="change-form-p">Quer criar uma conta? <a href="{% url 'register' %}">Clique aqui!</a></p>
+                <p class="change-form-p">Esqueceu a senha? <a href="{% url 'password_reset' %}">Clique aqui!</a></p>
         </div>
+      </div>
     </div>
 </div>
+
+
 {% endblock %}

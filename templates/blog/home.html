@@ -1,10 +1,25 @@
 {% extends 'base.html' %}
 
-{% block title %}<title>Blog</title>{% endblock %}
+{% block title %}Blog{% endblock %}
 
 {% block content %}
 
-  <div class="container">
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% for error in form.non_field_errors %}
+     <div class="alert alert-danger">{{ error }}</div>
+{% endfor %}
+
+  <div class="container mt-5">
 
     <div class="row">
          <!-- Sidebar Widgets Column -->
@@ -24,7 +39,7 @@
 
         <!-- Title -->
 
-        <h1 class="mt-4"><a href="{% url 'post_details' pk=post.pk %}">{{ post.title }}</a></h1>
+        <h1 class="mt-4"><a href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a></h1>
 
         <!-- Author -->
         <p class="lead">
@@ -59,17 +74,17 @@
    
     <div class="pagination">
         <span class="step-links">
-            {% if posts.has_previous %}
+            {% if post.has_previous %}
                 <a href="?page={{ posts.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
             {% endif %}
             
-            {% if posts.paginator.num_pages %}
+            {% if post.paginator.num_pages %}
             <span class="current">
-                {{ posts.number }} de {{ posts.paginator.num_pages }}
+                {{ post.number }} de {{ post.paginator.num_pages }}
             </span>
             {% endif %}
         
-            {% if posts.has_next %}
+            {% if post.has_next %}
                 <a href="?page={{ posts.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
             {% endif %}
         </span>
