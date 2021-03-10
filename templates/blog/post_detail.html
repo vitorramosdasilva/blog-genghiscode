@@ -65,7 +65,10 @@
                 <strong>{{ comment.author.get_full_name }}</strong>
                 <p>{{ comment.texto|linebreaks }}</p>
                 {% if user.is_authenticated and user == post.author %}
-                  <p><a href="{% url 'comment-update' pk=comment.pk co}">Editar </a><a href="{% url 'comment-delete' pk=comment.pk co}">Excluir</a></p>
+                  <p>
+                      <a href="{% url 'comment-update' pk=comment.pk %}">Editar </a>
+                      <a href="{% url 'comment-delete' pk=comment.pk %}">Excluir</a>
+                  </p>
                 {% endif %}
             </div>
         {% empty %}
