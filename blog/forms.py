@@ -13,7 +13,7 @@ class PesquisaForm(forms.Form):
         # required=True
     )
 
-class Postform(forms.ModelForm):
+class PostForm(forms.ModelForm):
 #     conteudo = forms.CharField(widget=CKEditorWidget())
     class Meta:
         model = Post#

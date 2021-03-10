@@ -3,7 +3,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView, D
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-from blog.forms import PesquisaForm, Postform, CommentForm
+from blog.forms import PesquisaForm, PostForm, CommentForm
 from blog.models import Post, Comment
 from django.views.generic import View
 from django.shortcuts import render, redirect, get_object_or_404
@@ -59,7 +59,7 @@ def PostDetailView(request, pk):
 @login_required
 def PostCreateView(request):
     if request.method == 'POST':
-        form = Postform(request.POST, request.FILES)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -67,7 +67,7 @@ def PostCreateView(request):
             return redirect('post-detail', pk=post.pk)
 
     else:
-        form = Postform()
+        form = PostForm()
     return render(request, 'blog/post_create.html', {'form': form})
 
 
@@ -75,7 +75,7 @@ def PostCreateView(request):
 def PostUpdateView(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
-        form = Postform(request.POST, instance=post)
+        form = PostForm(request.POST, instance=post)
         if form.is_valid():
             if request.user == post.author:
                 post = form.save(commit=False)
@@ -83,13 +83,14 @@ def PostUpdateView(request, pk):
                 post.save()
                 return redirect('post-detail', pk=post.pk)
     else:
-        form = Postform(instance=post)
+        form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
 
 
 @login_required
 def CommentUpdateView(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
+    post = comment.post.pk
     if request.method == "POST":
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
@@ -97,21 +98,24 @@ def CommentUpdateView(request, pk):
                 comment = form.save(commit=False)
                 comment.author = request.user
                 comment.save()
-                return redirect('post-detail', pk=comment.pk)
+                return redirect('post-detail', pk=post)
+    else:
+        form = CommentForm(instance=comment)
+    return render(request, 'blog/comment_edit.html', {'form': form})
 
 
 @login_required
 def PostDeleteView(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
-        form = C(request.POST, instance=post)
+        form = PostForm(request.POST, instance=post)
         if form.is_valid():
             if request.user == post.author:
                 Post.delete()
                 messages.success(request, 'Post delete successfully')
                 return redirect('blog-home')
     else:
-        form = Postform(instance=post)
+        form = PostForm(instance=post)
     return render(request, 'blog/post_delete.html', {'form': form})
 
 
@@ -126,7 +130,7 @@ def CommentDeleteView(request, pk):
                 messages.success(request, 'Comentário deletado com sucesso')
                 return redirect('blog-home')
     else:
-        form = Postform(instance=comment)
+        form = CommentForm(instance=comment)
     return render(request, 'blog/comment_delete.html', {'form': form})
 
 
