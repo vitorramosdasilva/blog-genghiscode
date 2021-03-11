@@ -1,14 +1,22 @@
 {% load static %}
    <!-- Categories Widget -->
         <div class="card my-4">
-          <h5 class="card-header">Categorias</h5>
+          <h5 class="card-header">Categorias
+              <a class="btn btn-primary btn-lm" href="{% url 'category-create' %}" role="button">Nova</a>
+          </h5>
           <div class="card-body">
             <div class="row">
               <div class="col-lg-6">
                 <ul class="list-unstyled mb-0">
                   {% for categoria in categories %}
                   <li>
-                    <a href="{% url 'post_category' pk=categoria.pk %}">{{ categoria }}</a>
+                    <a href="#">{{ categoria }}</a>
+                     {% if user.is_authenticated and user == categoria.author %}
+                    <div class="btn-group" role="group">
+                      <a class="btn btn-warning btn-sm" href="{% url 'category-update' pk=categoria.pk %}">Editar</a>
+                      <a class="btn btn-danger btn-sm" href="{% url 'category-delete' pk=categoria.pk %}">Excluir</a>
+                    </div>
+                      {% endif %}
                   </li>
                   {% endfor %}
                 </ul>

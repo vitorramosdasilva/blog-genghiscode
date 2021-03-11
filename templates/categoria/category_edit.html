@@ -1,18 +1,35 @@
 {% extends 'base.html' %}
-{% block title %} Blog - Editar Categoria {% endblock title %}
+{% block title %}Blog - Editar Categoria {% endblock title %}
+{% load cloudinary %}
+{% load widget_tweaks %}
 {% block content %}
-<div class="container justify-content-center">
-    <div class="card" >
-      <div class="card-header">
-          <h1>Editar Categoria</h1>
-      </div>
-      <div class="card-body">
-            <form action="" method="post">{% csrf_token %}
-                {{form}}
-                <input type="submit" value="Editar" class="btn btn-primary">
-            </form>
+
+    <div class="row mt-3">
+        <div class="col-lg-4 mx-auto mt-5">
+            <h1>Editar Categoria</h1>
         </div>
     </div>
-</div>
+
+    <form method="post" enctype="multipart/form-data">
+         {% csrf_token %}
+         {% for error in form.non_field_errors %}
+             <div class="alert alert-danger">{{ error }}</div>
+          {% endfor %}
+        <div class="row">
+            <div class="col-lg-4 mx-auto mb-5 mt-5">
+                 <div class="form-group{% if form.nome.errors %} has-error {% endif %}">
+                    <label for="{{ form.nome.auto_id }}"> {{ form.nome.label }}:</label>
+                    {% render_field form.nome class="form-control form-control-sm" %}
+                </div>
+                <button type="submit" class="btn btn-primary">Editar</button>
+            </div>
+        </div>
+    </form>
+<div class="row mb-5"></div>
+<div class="row mb-5"></div>
+<div class="row mb-5"></div>
+<div class="row mb-5"></div>
+<div class="row mb-5"></div>
+<div class="row mb-5"></div>
 
 {% endblock content %}

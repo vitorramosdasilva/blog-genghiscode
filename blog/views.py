@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 from blog.forms import PesquisaForm, PostForm, CommentForm
 from blog.models import Post, Comment
-from django.views.generic import View
 from django.shortcuts import render, redirect, get_object_or_404
 
 
@@ -32,7 +31,8 @@ class PostListView(ListView):
     template_name = 'blog/home.html'
     context_object_name = 'posts'
     ordering = ['-created_at']
-    paginate_by = 5
+    paginate_by = 2
+    queryset = Post.objects.all()
 
 
 @login_required
@@ -131,7 +131,7 @@ def CommentDeleteView(request, pk):
                 return redirect('blog-home')
     else:
         form = CommentForm(instance=comment)
-    return render(request, 'blog/comment_delete.html', {'form': form})
+    return render(request, 'blog/comment_delete.html', {'form': form, 'comment': comment})
 
 
 def error_400(request, exception):

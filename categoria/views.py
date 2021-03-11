@@ -1,10 +1,7 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 from blog.models import Post, Category
-# from categoria.forms import Categoryform
-from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic.edit import CreateView
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+from .forms import CategoryForm
 from django.contrib import messages
 
 
@@ -17,65 +14,47 @@ def category(request, pk):
     return render(request, 'post_category.html', context)
 
 
-# class CategoryListView(ListView):
-#     model = Category
-#     template_name = 'categoria/home.html'
-#
-#
-# class CategoryDetailView(DetailView):
-#     model = Category
-#     template_name = 'categoria/category_detail.html'
-#
-#
-# class CategoryCreateView(SuccessMessageMixin, CreateView):
-#     model = Category
-#     template_name = 'categoria/category_new.html'
-#     form_class = Categoryform
-#     success_message = "%(field)s - criado com sucesso"
-#
-#     def form_valid(self, form):
-#         obj = form.save(commit=False)
-#         obj.autor = self.request.user
-#         obj.save()
-#         return super().form_valid(form)
-#
-#     def get_success_message(self, cleaned_data):
-#         return self.success_message % dict(
-#             cleaned_data,
-#             field=self.object.titulo,
-#         )
-#
-# # class PostUpdateView(LoginRequiredMixin,SuccessMessageMixin,UpdateView):
-#
-#
-# class CategoryUpdateView(SuccessMessageMixin, UpdateView):
-#     model = Category
-#     form_class = Categoryform
-#     template_name = 'categoria/category_edit.html'
-#     # fields = ('summary','content')
-#     success_message = "%(field)s - alterado com sucesso"
-#
-#     def form_valid(self, form):
-#         obj = form.save(commit=False)
-#         obj.autor = self.request.user
-#         obj.save()
-#         return super().form_valid(form)
-#
-#     def get_success_message(self, cleaned_data):
-#         return self.success_message % dict(
-#             cleaned_data,
-#             field=self.object.titulo,
-#         )
-#
-# # class PostDeleteView(LoginRequiredMixin,SuccessMessageMixin,DeleteView):
-#
-#
-# class CategoryDeleteView(SuccessMessageMixin, DeleteView):
-#     model = Category
-#     template_name = 'categoria/category_delete.html'
-#     success_url = reverse_lazy('home')
-#     success_message = "Deletado com sucesso"
-#
-#     def delete(self, request, *args, **kwargs):
-#         messages.success(self.request, self.success_message)
-#         return super(CategoryDeleteView, self).delete(request, *args, **kwargs)
+@login_required
+def CategoryCreateView(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            categoria = form.save(commit=False)
+            categoria.author = request.user
+            categoria.save()
+            return redirect('blog-home')
+
+    else:
+        form = CategoryForm()
+    return render(request, 'categoria/category_create.html', {'form': form})
+
+
+@login_required
+def CategoryUpdateView(request, pk):
+    categoria = get_object_or_404(Category, pk=pk)
+    if request.method == "POST":
+        form = CategoryForm(request.POST, instance=categoria)
+        if form.is_valid():
+            if request.user == categoria.author:
+                categoria = form.save(commit=False)
+                categoria.author = request.user
+                categoria.save()
+                return redirect('blog-home')
+    else:
+        form = CategoryForm(instance=categoria)
+    return render(request, 'categoria/category_edit.html', {'form': form})
+
+
+@login_required
+def CategoryDeleteView(request, pk):
+    categoria = get_object_or_404(Category, pk=pk)
+    if request.method == "POST":
+        form = CategoryForm(request.POST, instance=categoria)
+        if form.is_valid():
+            if request.user == categoria.author:
+                categoria.delete()
+                messages.success(request, 'Category delete successfully')
+                return redirect('blog-home')
+    else:
+        form = CategoryForm(instance=categoria)
+    return render(request, 'categoria/category_delete.html', {'form': form, 'category': categoria})
