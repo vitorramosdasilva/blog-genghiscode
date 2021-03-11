@@ -12,6 +12,8 @@ urlpatterns = [
     path('pesquisa/', views.pesquisa, name='pesquisa'),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    # Social ...
+    path('oauth/', include('social_django.urls', namespace='social')),  # <--
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'widget_tweaks',
     'crispy_forms',
+    'social_django',
     
     # 'whitenoise.runserver_nostatic',
     # 'ckeditor_uploader',
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',  #Social
 ]
 
 ROOT_URLCONF = 'my_project.urls'
@@ -65,8 +67,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # apps
+                # apps ...
                 'blog.context_processors.categories',
+                # Social ...
+                'social_django.context_processors.backends',  # <--
+                'social_django.context_processors.login_redirect', # <--
             ],
         },
     },
@@ -126,6 +131,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'blog-home'
 LOGOUT_REDIRECT_URL = 'blog-home'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+# LOGIN_REDIRECT_URL = 'home'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
@@ -139,6 +147,11 @@ DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'accounts.authentication.EmailAuthBackend',
+    # Social
+    'social_core.backends.github.GithubOAuth2' ,
+    'social_core.backends.twitter.TwitterOAuth' ,
+    'social_core.backends.facebook.FacebookOAuth2',
+
 ]
 
 CLOUDINARY = {
@@ -147,6 +160,15 @@ CLOUDINARY = {
     'api_secret': os.environ.get('api_secret')
 }
 
+SOCIAL_AUTH_GITHUB_KEY = os.environ.get('SOCIAL_AUTH_GITHUB_KEY')
+SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('SOCIAL_AUTH_GITHUB_SECRET')
+SOCIAL_AUTH_TWITTER_KEY = os.environ.get('SOCIAL_AUTH_TWITTER_KEY')
+SOCIAL_AUTH_TWITTER_SECRET = os.environ.get('SOCIAL_AUTH_TWITTER_SECRET')
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('SOCIAL_AUTH_FACEBOOK_SECRET')
+
+
+ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
 # CKEDITOR_RESTRICT_BY_USER = True
 try:
     from .local_settings import *
