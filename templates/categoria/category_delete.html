@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Blog - Deletar Categoria {% endblock title %}
+{% load cloudinary %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+ <div class="row mt-3">
+<div class="col-lg-4 mx-auto mt-5">
+       <h1>Deletar Categoria</h1>
+</div>
+</div>
+
+<div class="row">
+<div class="col-lg-4 mx-auto mb-5 mt-5">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <p>Você tem certeza, que deseja excluir o registro {{category.nome}} ?</p>
+        <input type="submit" value="Confirmar" class="btn btn-danger btn-sm">
+    </form>
+</div>
+</div>
+
+<div class="row mb-5"></div>
+<div class="row mb-5"></div>
+<div class="row mb-5"></div>
+<div class="row mb-5"></div>
+<div class="row mb-5"></div>
+{% endblock content %}

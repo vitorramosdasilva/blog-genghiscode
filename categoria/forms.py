@@ -1,9 +1,9 @@
 from django import forms
-from .models import Category
+from blog.models import Category
 
-class Categoryform(forms.ModelForm):
+class CategoryForm(forms.ModelForm):
    class Meta:
         model = Category
-        fields = ('nome','author')
+        fields = ('nome',)
 #         title = models.CharField(max_length=255)
 #         created_at
