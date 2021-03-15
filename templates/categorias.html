@@ -12,10 +12,10 @@
                   <li>
                     <a href="#">{{ categoria }}</a>
                      {% if user.is_authenticated and user == categoria.author %}
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-warning btn-sm" href="{% url 'category-update' pk=categoria.pk %}">Editar</a>
-                      <a class="btn btn-danger btn-sm" href="{% url 'category-delete' pk=categoria.pk %}">Excluir</a>
-                    </div>
+                      <div class="btn-group" role="group">
+                        <a class="btn btn-warning btn-sm" href="{% url 'category-update' pk=categoria.pk %}">Editar</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'category-delete' pk=categoria.pk %}">Excluir</a>
+                      </div>
                       {% endif %}
                   </li>
                   {% endfor %}
