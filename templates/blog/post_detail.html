@@ -8,7 +8,7 @@
   <div class="container mt-5">
     <div class="row">
           <!-- Sidebar Widgets Column -->
-      <div class="col-md-3">
+      <div class="col-md-4">
         <!-- Search Widget -->
         {% include 'procura.html' %}
         <!-- Categories Widget -->
@@ -19,9 +19,9 @@
 
       <!-- Post Content Column -->
 
-      <div class="col-md-8">
+      <div class="col-lg-8">
         <!-- Title -->
-          {{user.username }}
+
         <h1 class="mt-4">{{ post.title }}</h1>
         <!-- Author -->
         <p class="lead">
@@ -60,6 +60,12 @@
                       <a href="{% url 'comment-update' pk=comment.pk %}">Editar </a>
                       <a href="{% url 'comment-delete' pk=comment.pk %}">Excluir</a>
                   </p>
+                {% else %}
+                    <p>
+                      <a href="#">Editar </a>
+                      <a href="#">Excluir</a>
+                    </p>
+
                 {% endif %}
             </div>
         {% empty %}

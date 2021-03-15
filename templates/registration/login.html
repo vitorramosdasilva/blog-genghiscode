@@ -9,20 +9,21 @@
         <div class="card  auth-card mb-5">
             <div class="card-body">
                 <h4 class="card-title text-center">Entrar no DashBoard</h4>
-                 <form id="form_login" method="post">
-                     {% csrf_token %}
-                     {{ form|crispy }}
-                      <input type="hidden" name="next" value="{{ next }}">
 
-                    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-                </form>
+                    <form id="form_login" method="post">
+                         {% csrf_token %}
+                         {{ form|crispy }}
+                          <input type="hidden" name="next" value="{{ next }}">
+
+                        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                    </form>
                 <br>
-                <p><strong>-- OR --</strong></p>
-                <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
-                <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a><br>
-<!--                <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>-->
-                <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
-                </br>
+<!--                <p><strong>&#45;&#45; OR &#45;&#45;</strong></p>-->
+<!--                <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>-->
+<!--                <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a><br>-->
+<!--&lt;!&ndash;                <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>&ndash;&gt;-->
+<!--                <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>-->
+<!--                </br>-->
                 <p class="change-form-p">Quer criar uma conta? <a href="{% url 'register' %}">Clique aqui!</a></p>
                 <p class="change-form-p">Esqueceu a senha? <a href="{% url 'password_reset' %}">Clique aqui!</a></p>
 
