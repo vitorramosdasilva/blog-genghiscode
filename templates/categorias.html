@@ -1,13 +1,18 @@
 {% load static %}
    <!-- Categories Widget -->
         <div class="card my-4">
-          <h5 class="card-header">Categorias
-              <a class="btn btn-primary btn-lm" href="{% url 'category-create' %}" role="button">Nova</a>
+          <h5 class="card-header">
+              Categorias
           </h5>
           <div class="card-body">
             <div class="row">
               <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
+                  <h5>Nova Categoria</h5>
+                  <a class="btn btn-primary btn-lm" href="{% url 'category-create' %}" role="button">Nova</a>
+
+                   <h6 class="my-4">Todas Categorias :</h6>
+                  <hr>
+                  <ul class="list-unstyled mb-0">
                   {% for categoria in categories %}
                   <li>
                     <a href="#">{{ categoria }}</a>

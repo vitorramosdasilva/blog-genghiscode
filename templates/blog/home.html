@@ -26,15 +26,25 @@
         <!-- Search Widget -->
         {% include 'procura.html' %}
 
+        {% include 'create_post.html' %}
+
         <!-- Categories Widget -->
         {% include 'categorias.html' %}
 
+
+
       </div>
+<!--        <div class="col-lg-1">-->
+<!--            <h1>Criar Novo Post</h1>-->
+<!--            <a class="btn btn-primary btn-sm" href="{% url 'post-create' %}" role="button"></a>-->
+<!--        </div>-->
 
       <!-- Post Content Column -->
     {% for post in posts %}
 <!--      <div class="col-lg-8 float-right">-->
-        <div class="col-lg-8">
+
+
+        <div class="col-lg-7">
         <!-- Title -->
         <h1 class="mt-4"><a href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a></h1>
         <!-- Author -->
